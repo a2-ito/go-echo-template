@@ -5,17 +5,20 @@ BINARY	= go-echo-template
 export
 PORT	:= 8080
 
-all: lint build
+all: format lint run
 
 lint:
 	staticcheck ./...
 	golangci-lint run
 
+format:
+	gofmt -l -w .
+
 run:
 	go run main.go
 
 build:
-	go build -p $(BINARY) go
+	go build
 
 build-container:
 	pack build --builder=gcr.io/buildpacks/builder $(APP)

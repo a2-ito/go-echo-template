@@ -5,10 +5,12 @@ This is golang template files for echo middleware.
 ## Todo
 
 - [x] "Hello world" app with echo
-- [ ] .env configuration
+- [x] env configuration
 - [x] Build as a Container via buildpacks
-- [ ] lint with golangci-lint
-- [ ] format with a
+- [x] lint with golangci-lint
+- [x] format with go fmt
+- [ ] Build with a dockerfile
+- [ ] lint for dockerfile
 
 ## Usage
 

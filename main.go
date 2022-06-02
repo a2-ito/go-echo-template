@@ -1,28 +1,31 @@
 package main
 
 import (
-  "net/http"
-  "go-echo-template/helloworld"
-  "github.com/labstack/echo/v4"
-  "github.com/labstack/echo/v4/middleware"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
+	"go-echo-template/config"
+	"go-echo-template/helloworld"
+	"net/http"
 )
 
 // ハンドラーを定義
 func hello(c echo.Context) error {
-  return c.String(http.StatusOK, helloworld.Helloworld())
+	return c.String(http.StatusOK, helloworld.Helloworld())
 }
 
-func main()  {
+func main() {
 
-    // Echo instance
-    e := echo.New()
+	// Echo instance
+	e := echo.New()
 
-    // Middleware
-    e.Use(middleware.Logger())
-    e.Use(middleware.Recover())
+	goenv := config.LoadConfig()
 
-    e.GET("/", hello)
+	// Middleware
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
 
-    // Start server
-    e.Logger.Fatal(e.Start(":8080"))
+	e.GET("/", hello)
+
+	// Start server
+	e.Logger.Fatal(e.Start(":" + goenv.Port))
 }
