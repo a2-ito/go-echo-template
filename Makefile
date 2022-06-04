@@ -1,6 +1,8 @@
-APP	= itotest
-DOCKER	= docker
-BINARY	= go-echo-template
+DOCKER		= docker
+DOCKERFILE	= Dockerfile
+APP		= itotest
+BINARY		= go-echo-template
+LINT_IGNORE	= ""
 
 export
 PORT	:= 8080
@@ -10,6 +12,9 @@ all: format lint run
 lint:
 	staticcheck ./...
 	golangci-lint run
+
+hadolint:
+	$(DOCKER) run --rm -i hadolint/hadolint hadolint - --ignore ${LINT_IGNORE} < $(DOCKERFILE)
 
 format:
 	gofmt -l -w .
@@ -22,6 +27,9 @@ build:
 
 build-container:
 	pack build --builder=gcr.io/buildpacks/builder $(APP)
+
+build-container-from-dockerfile: hadolint
+	docker build -t $(APP) -f Dockerfile .
 
 run-container:
 	$(DOCKER) run -d -p $(PORT):$(PORT) --name itotest $(APP)

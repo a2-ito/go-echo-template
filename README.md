@@ -9,8 +9,10 @@ This is golang template files for echo middleware.
 - [x] Build as a Container via buildpacks
 - [x] lint with golangci-lint
 - [x] format with go fmt
-- [ ] Build with a dockerfile
-- [ ] lint for dockerfile
+- [x] Build with a dockerfile
+- [x] lint for dockerfile
+- [ ] Logging
+- [ ] go test
 
 ## Usage
 
