@@ -12,3 +12,15 @@ linters:
     - tparallel
     - unparam
     - wastedassign
+    - exhaustivestruct
+    - golint
+    - maligned
+    - scopelint
+    - gofumpt
+    - gci
+    - wrapcheck
+
+linters-settings:
+  varnamelen:
+    ignore-names:
+      - e
